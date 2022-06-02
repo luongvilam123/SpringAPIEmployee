@@ -4,12 +4,15 @@ package com.lam.employeespringapi.Controller;
 import com.lam.employeespringapi.Model.Employee;
 import com.lam.employeespringapi.Services.EmployeeServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
-@CrossOrigin(origins ="http://localhost:3000" )
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/")
 public class EmployeeController {
@@ -20,14 +23,24 @@ public class EmployeeController {
 
         this.employeeServices = employeeServices;
     }
-     @PostMapping("/employees")
-    public Employee createEmployee( @RequestBody Employee employee){
+
+    @PostMapping("/employees")
+    public Employee createEmployee(@RequestBody Employee employee) {
         return employeeServices.createEmployee(employee);
     }
 
     @GetMapping("/employees")
-    public List<Employee> getAllEmployees(){
+    public List<Employee> getAllEmployees() {
         return employeeServices.getAllEmployees();
 
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id) {
+        boolean deleted = false;
+        deleted = employeeServices.deleteEmployee(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted",deleted);
+        return ResponseEntity.ok(response);
     }
 }
