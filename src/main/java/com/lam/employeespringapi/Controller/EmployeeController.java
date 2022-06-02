@@ -1,6 +1,7 @@
 package com.lam.employeespringapi.Controller;
 
 
+import com.lam.employeespringapi.Entity.EmployeeEntity;
 import com.lam.employeespringapi.Model.Employee;
 import com.lam.employeespringapi.Services.EmployeeServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,17 @@ public class EmployeeController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted",deleted);
         return ResponseEntity.ok(response);
+    }
+    @GetMapping("/employees/{id}")
+    public ResponseEntity<Employee> getEmployeeById( @PathVariable Long id){
+        Employee employee =new Employee();
+        employee=employeeServices.getEmployeeById(id);
+        return ResponseEntity.ok(employee);
+    }
+    @PutMapping("/employees/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
+        employee =employeeServices.updateEmployee(id,employee);
+        return ResponseEntity.ok(employee);
+
     }
 }
