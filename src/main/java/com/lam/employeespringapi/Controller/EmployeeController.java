@@ -1,11 +1,12 @@
 package com.lam.employeespringapi.Controller;
 
 
-import com.lam.employeespringapi.Entity.EmployeeEntity;
 import com.lam.employeespringapi.Model.Employee;
 import com.lam.employeespringapi.Services.EmployeeServices;
+import com.lam.employeespringapi.message.EmployeeChannel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -13,12 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 
-//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/")
 public class EmployeeController {
 
     final EmployeeServices employeeServices;
+
+    @Autowired
+    private EmployeeChannel employeeChannel;
 
     public EmployeeController(EmployeeServices employeeServices) {
 
@@ -38,7 +41,7 @@ public class EmployeeController {
 
     @DeleteMapping("/employees/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id) {
-        boolean deleted = false;
+        boolean deleted;
         deleted = employeeServices.deleteEmployee(id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted",deleted);
@@ -46,7 +49,7 @@ public class EmployeeController {
     }
     @GetMapping("/employees/{id}")
     public ResponseEntity<Employee> getEmployeeById( @PathVariable Long id){
-        Employee employee =new Employee();
+        Employee employee;
         employee=employeeServices.getEmployeeById(id);
         return ResponseEntity.ok(employee);
     }
@@ -55,5 +58,11 @@ public class EmployeeController {
         employee =employeeServices.updateEmployee(id,employee);
         return ResponseEntity.ok(employee);
 
+    }
+
+    @PostMapping("/test")
+    public Employee testingKafka(@RequestBody Employee employee){
+        employeeChannel.produceMessage().send(MessageBuilder.withPayload(employee).build());
+        return employee;
     }
 }

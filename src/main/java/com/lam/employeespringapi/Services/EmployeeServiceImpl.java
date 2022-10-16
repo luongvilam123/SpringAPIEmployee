@@ -5,6 +5,7 @@ import com.lam.employeespringapi.Entity.EmployeeEntity;
 import com.lam.employeespringapi.Model.Employee;
 import com.lam.employeespringapi.Repository.EmployeeRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

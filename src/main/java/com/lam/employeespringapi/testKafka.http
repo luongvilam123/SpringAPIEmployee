@@ -1,0 +1,9 @@
+POST http://localhost:8888/api/v1/test
+Content-Type: application/json
+
+{
+  "id": 999,
+  "firstName": "content",
+  "lastName": "content",
+  "email": "content"
+}
