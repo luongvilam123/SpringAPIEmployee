@@ -4,8 +4,9 @@ package com.lam.employeespringapi.Services;
 import com.lam.employeespringapi.Entity.EmployeeEntity;
 import com.lam.employeespringapi.Model.Employee;
 import com.lam.employeespringapi.Repository.EmployeeRepository;
+import com.lam.employeespringapi.exception.DomainException;
+import com.lam.employeespringapi.exception.ErrorCode;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,10 +47,12 @@ public class EmployeeServiceImpl implements EmployeeServices{
 
     @Override
     public Employee getEmployeeById(Long id) {
-        EmployeeEntity employeeEntity =employeeRepository.findById(id).get();
+        EmployeeEntity employeeEntity =employeeRepository.findById(id)
+                .orElseThrow(()-> new DomainException(ErrorCode.Employee_Error_Code));
         Employee employee =new Employee();
         BeanUtils.copyProperties(employeeEntity,employee);
         return employee;
+
     }
 
     @Override

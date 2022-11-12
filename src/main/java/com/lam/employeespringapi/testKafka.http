@@ -7,3 +7,6 @@ Content-Type: application/json
   "lastName": "content",
   "email": "content"
 }
+###
+GET http://localhost:8888/api/v1/employees/2
+Accept: application/json
