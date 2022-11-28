@@ -1,12 +1,14 @@
 package com.lam.employeespringapi.Entity;
 
 
+import com.lam.employeespringapi.validator.BlankConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity // danh dau la entity
 @Data

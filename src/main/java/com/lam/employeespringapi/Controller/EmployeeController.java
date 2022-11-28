@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public Employee createEmployee(@RequestBody Employee employee) {
+    public Employee createEmployee(@Valid @RequestBody Employee employee) {
         return employeeServices.createEmployee(employee);
     }
 
