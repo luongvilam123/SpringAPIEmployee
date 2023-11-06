@@ -1,35 +1,23 @@
 # CRUD Employee Management
 
-## - Sử dụng ReactJs, SpringBoot, MySQL để xây dụng một ứng dụng CRUD cơ bản
-
+## Using ReactJs, SpringBoot, MySQL to build a simple employee management
 ![Structure](image/reactspring.png)
-
-## - Cấu trúc file bên phía back-end :
-
+## Back-end Folder Structure:
 ![Structure](image/springstructure.png)
-
-## - Cấu trúc file bên phía front-end :
-
+## Front-end Folder Structure:
 ![Structure](image/reactstructure.png)
 
-## - Các thư viện cần cài đặt
-
+## Install needed dependencies
 1. react-router-dom
 2. react-hook-form
 3. tailwindcss
 4. axios
 5. react-hot-toast
 
-## - Các chức năng cơ bản
-
-### Đọc danh sách nhân viên từ MySql và hiển thị ra :
-
+## Basic Functions:
+### Display a List Of Employee 
 ![ListEmployee](image/listemployee.png)
-
-### Thêm nhân viên vào MySql từ form :
-
+### Add new employee:
 ![AddEmployee](image/addemployee.png)
-
-### Xoá nhân viên và Cập nhật nhân viên vào MySql từ form :
-
+### Delete an employee:
 ![EditDeleteEmployee](image/editemployee.png)
